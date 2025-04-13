@@ -22,29 +22,8 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-def getContributors(repoOwner, repoName) {
-    def url = "https://api.github.com/repos/${repoOwner}/${repoName}/stats/contributors"
-    def connection = (HttpURLConnection) new URI(url).toURL().openConnection()
-
-    connection.requestMethod = "GET"
-    connection.connectTimeout = 5000
-    connection.readTimeout = 5000
-
-    connection.setRequestProperty("User-Agent", "LiquidBounce-App")
-
-    if (200 <= connection.responseCode && connection.responseCode <= 299) {
-        def response = connection.inputStream.text
-        def json = new JsonSlurper().parseText(response)
-        return json[]
-                .collect { it['author']['login'] }
-                .findAll { !(it as String).contains("dependabot") }
-                .reversed()
-
-    } else {
-        def error = connection.errorStream?.text ?: "No response details"
-        logger.log(LogLevel.ERROR, "Failed to collect contributors, github api responsed invalid status code: ${connection.responseCode}\n${error}")
-        return []
-    }
+static def getContributors(repoOwner, repoName) {
+    return ["bzym2","CCBlueX"]
 }
 
 
