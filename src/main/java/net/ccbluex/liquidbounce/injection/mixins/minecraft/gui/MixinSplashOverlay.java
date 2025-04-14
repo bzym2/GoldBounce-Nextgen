@@ -22,18 +22,22 @@ package net.ccbluex.liquidbounce.injection.mixins.minecraft.gui;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.ccbluex.liquidbounce.common.ClientLogoTexture;
+import net.ccbluex.liquidbounce.common.ZeqinShieldTexture;
 import net.ccbluex.liquidbounce.common.RenderLayerExtensions;
+import net.ccbluex.liquidbounce.common.ZeqinShieldTexture;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.events.ScreenRenderEvent;
 import net.ccbluex.liquidbounce.features.misc.HideAppearance;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -48,12 +52,15 @@ import java.util.function.IntSupplier;
 @Mixin(SplashOverlay.class)
 public class MixinSplashOverlay {
 
+    @Shadow
+    @Final
+    private MinecraftClient client;
     @Unique
     private static final IntSupplier CLIENT_ARGB = () -> ColorHelper.getArgb(255, 24, 26, 27);
 
     @Inject(method = "init", at = @At("RETURN"))
     private static void initializeTexture(TextureManager textureManager, CallbackInfo ci) {
-        textureManager.registerTexture(ClientLogoTexture.CLIENT_LOGO, new ClientLogoTexture());
+        textureManager.registerTexture(ZeqinShieldTexture.CLIENT_LOGO, new ZeqinShieldTexture());
     }
 
     @Inject(method = "render", at = @At("RETURN"))
@@ -85,10 +92,8 @@ public class MixinSplashOverlay {
         int screenWidth = context.getScaledWindowWidth();
         int screenHeight = context.getScaledWindowHeight();
 
-        float scaleFactor = Math.min(screenWidth * 0.4f / ClientLogoTexture.WIDTH, screenHeight * 0.25f / ClientLogoTexture.HEIGHT);
-
-        int displayWidth = (int)(ClientLogoTexture.WIDTH * scaleFactor);
-        int displayHeight = (int)(ClientLogoTexture.HEIGHT * scaleFactor);
+        int displayWidth = this.client.getWindow().getWidth() /2;
+        int displayHeight = this.client.getWindow().getHeight() /2;
 
         int x = (screenWidth - displayWidth) / 2;
         int y = (screenHeight - displayHeight) / 2;
@@ -96,17 +101,17 @@ public class MixinSplashOverlay {
         // TODO: Draw as SVG instead of PNG
         context.drawTexture(
                 RenderLayerExtensions::getSmoothTextureLayer,
-                ClientLogoTexture.CLIENT_LOGO,
+                ZeqinShieldTexture.CLIENT_LOGO,
                 x,
                 y,
                 0.0F,
                 0.0F,
                 displayWidth,
                 displayHeight,
-                ClientLogoTexture.WIDTH,
-                ClientLogoTexture.HEIGHT,
-                ClientLogoTexture.WIDTH,
-                ClientLogoTexture.HEIGHT,
+                ZeqinShieldTexture.WIDTH,
+                ZeqinShieldTexture.HEIGHT,
+                ZeqinShieldTexture.WIDTH,
+                ZeqinShieldTexture.HEIGHT,
                 color
         );
     }

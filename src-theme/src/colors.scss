@@ -1,4 +1,4 @@
-$accent-color: #4677ff;
+$accent-color: #ffd700;
 
 $clickgui-base-color: black;
 $clickgui-text-color: white;
@@ -22,15 +22,15 @@ $blockcounter-base-color: black;
 $hotbar-base-color: black;
 $hotbar-text-color: white;
 /* TODO: currently unused */
-$hotbar-experience-color: #88C657;
-$hotbar-health-color: #FC4130;
-$hotbar-hunger-color: #B88458;
+$hotbar-experience-color: #bfc458;
+$hotbar-health-color: #f7e32f;
+$hotbar-hunger-color: #c7b926;
 
-$menu-account-premium-color: #67D24A;
+$menu-account-premium-color: #f2ff00;
 $menu-base-color: black;
 $menu-text-color: white;
 $menu-text-dimmed-color: rgba(211, 211, 211, 255);
-$menu-error-color: #fc4130;
+$menu-error-color: #bfc458;
 $menu-button-loader-color: white;
 
 $scoreboard-base-color: black;
@@ -39,3 +39,17 @@ $keystrokes-base-color: black;
 $keystrokes-text-color: white;
 
 $item-damage-base-color: black;
+
+$fade-color: black; // fade color
+
+$opacity: 0.55; // opacity
+
+$dot-color: white; // dot color
+
+$background-color: black;
+
+$border-thing: rgba(white, 0.1);
+
+$primary-box-shadow: 0 0 10px rgba(black, 0.5); // primary box shadow
+$misc-box-shadow: 0 0 10px rgba(black, 0.3); // misc box shadow
+$userinfo-box-shadow: 0 0 5px rgba(black, 0.5); // userinfo box shadow

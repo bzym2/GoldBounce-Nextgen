@@ -2,7 +2,7 @@
 <!--
   - This file is part of LiquidBounce (https://github.com/CCBlueX/LiquidBounce)
   -
-  - Copyright (c) 2015 - 2025 CCBlueX
+  - Copyright (c) 2024 CCBlueX
   -
   - LiquidBounce is free software: you can redistribute it and/or modify
   - it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@
        fill-rule="evenodd"
        clip-rule="evenodd"
        d="M 263.182,147.409 C 263.182,74.7827 204.217,15.8192 131.59,15.8192 H 0 V 147.409 C 0,220.037 58.9635,279 131.59,279 c 72.627,0 131.592,-58.963 131.592,-131.591 z"
-       fill="#4677FF"
+       fill="#2e2e2e"
        id="path13" />
   </g>
   <defs

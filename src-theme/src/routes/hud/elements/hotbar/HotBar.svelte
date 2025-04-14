@@ -83,7 +83,7 @@
                     <Status
                             max={20}
                             value={playerData.armor}
-                            color="#49EAD6"
+                            color="#dbe649"
                             alignRight={false}
                             icon="shield"
                     />
@@ -95,7 +95,7 @@
                     <Status
                             max={playerData.maxAir}
                             value={playerData.air}
-                            color="#AAC1E3"
+                            color="#dedaa6"
                             alignRight={true}
                     />
                 {:else}

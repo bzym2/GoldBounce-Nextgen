@@ -14,6 +14,7 @@
   "overlays": [
     "hud",
     "inventory",
+    "splash",
     "container",
     "disconnected",
     "browser"
@@ -50,7 +51,37 @@
       ]
     },
     {
-      "name": "TabGui",
+      "name": "ArrayList",
+      "value": [
+        {
+          "name": "Enabled",
+          "value": true
+        },
+        {
+          "name": "Alignment",
+          "value": [
+            {
+              "name": "Horizontal",
+              "value": "Right"
+            },
+            {
+              "name": "HorizontalOffset",
+              "value": 15
+            },
+            {
+              "name": "Vertical",
+              "value": "Top"
+            },
+            {
+              "name": "VerticalOffset",
+              "value": 15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
       "value": [
         {
           "name": "Enabled",
@@ -73,67 +104,7 @@
             },
             {
               "name": "VerticalOffset",
-              "value": 90
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "ArrayList",
-      "value": [
-        {
-          "name": "Enabled",
-          "value": true
-        },
-        {
-          "name": "Alignment",
-          "value": [
-            {
-              "name": "Horizontal",
-              "value": "Right"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 0
-            },
-            {
-              "name": "Vertical",
-              "value": "Top"
-            },
-            {
-              "name": "VerticalOffset",
-              "value": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Notifications",
-      "value": [
-        {
-          "name": "Enabled",
-          "value": true
-        },
-        {
-          "name": "Alignment",
-          "value": [
-            {
-              "name": "Horizontal",
-              "value": "Right"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 15
-            },
-            {
-              "name": "Vertical",
-              "value": "Bottom"
-            },
-            {
-              "name": "VerticalOffset",
-              "value": 5
+              "value": 75
             }
           ]
         }
@@ -144,7 +115,7 @@
       "value": [
         {
           "name": "Enabled",
-          "value": true
+          "value": false
         },
         {
           "name": "Alignment",
@@ -200,96 +171,6 @@
       ]
     },
     {
-      "name": "ArmorItems",
-      "value": [
-        {
-          "name": "Enabled",
-          "value": false
-        },
-        {
-          "name": "Alignment",
-          "value": [
-            {
-              "name": "Horizontal",
-              "value": "CenterTranslated"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 225
-            },
-            {
-              "name": "Vertical",
-              "value": "Bottom"
-            },
-            {
-              "name": "VerticalOffset",
-              "value": 15
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Inventory",
-      "value": [
-        {
-          "name": "Enabled",
-          "value": false
-        },
-        {
-          "name": "Alignment",
-          "value": [
-            {
-              "name": "Horizontal",
-              "value": "Right"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 15
-            },
-            {
-              "name": "Vertical",
-              "value": "Bottom"
-            },
-            {
-              "name": "VerticalOffset",
-              "value": 15
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "CraftingInventory",
-      "value": [
-        {
-          "name": "Enabled",
-          "value": false
-        },
-        {
-          "name": "Alignment",
-          "value": [
-            {
-              "name": "Horizontal",
-              "value": "Right"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 15
-            },
-            {
-              "name": "Vertical",
-              "value": "Bottom"
-            },
-            {
-              "name": "VerticalOffset",
-              "value": 150
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "Minimap",
       "value": [
         {
@@ -335,19 +216,19 @@
           "value": [
             {
               "name": "Horizontal",
-              "value": "Center"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 20
-            },
-            {
-              "name": "Vertical",
               "value": "CenterTranslated"
             },
             {
-              "name": "VerticalOffset",
+              "name": "HorizontalOffset",
               "value": 0
+            },
+            {
+              "name": "Vertical",
+              "value": "Center"
+            },
+            {
+              "name": "VerticalOffset",
+              "value": 200
             }
           ]
         }
@@ -365,19 +246,19 @@
           "value": [
             {
               "name": "Horizontal",
-              "value": "Center"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": -20
-            },
-            {
-              "name": "Vertical",
               "value": "CenterTranslated"
             },
             {
-              "name": "VerticalOffset",
+              "name": "HorizontalOffset",
               "value": 0
+            },
+            {
+              "name": "Vertical",
+              "value": "Center"
+            },
+            {
+              "name": "VerticalOffset",
+              "value": 300
             }
           ]
         }
@@ -385,6 +266,66 @@
     },
     {
       "name": "Effects",
+      "value": [
+        {
+          "name": "Enabled",
+          "value": true
+        },
+        {
+          "name": "Alignment",
+          "value": [
+            {
+              "name": "Horizontal",
+              "value": "Center"
+            },
+            {
+              "name": "HorizontalOffset",
+              "value": 185
+            },
+            {
+              "name": "Vertical",
+              "value": "Bottom"
+            },
+            {
+              "name": "VerticalOffset",
+              "value": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Keystrokes",
+      "value": [
+        {
+          "name": "Enabled",
+          "value": true
+        },
+        {
+          "name": "Alignment",
+          "value": [
+            {
+              "name": "Horizontal",
+              "value": "Right"
+            },
+            {
+              "name": "HorizontalOffset",
+              "value": 15
+            },
+            {
+              "name": "Vertical",
+              "value": "Bottom"
+            },
+            {
+              "name": "VerticalOffset",
+              "value": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Taco",
       "value": [
         {
           "name": "Enabled",
@@ -408,66 +349,6 @@
             {
               "name": "VerticalOffset",
               "value": 15
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Keystrokes",
-      "value": [
-        {
-          "name": "Enabled",
-          "value": false
-        },
-        {
-          "name": "Alignment",
-          "value": [
-            {
-              "name": "Horizontal",
-              "value": "Left"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 15
-            },
-            {
-              "name": "Vertical",
-              "value": "Bottom"
-            },
-            {
-              "name": "VerticalOffset",
-              "value": 15
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Taco",
-      "value": [
-        {
-          "name": "Enabled",
-          "value": false
-        },
-        {
-          "name": "Alignment",
-          "value": [
-            {
-              "name": "Horizontal",
-              "value": "Left"
-            },
-            {
-              "name": "HorizontalOffset",
-              "value": 0
-            },
-            {
-              "name": "Vertical",
-              "value": "Bottom"
-            },
-            {
-              "name": "VerticalOffset",
-              "value": 65
             }
           ]
         }

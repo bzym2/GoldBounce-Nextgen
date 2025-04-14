@@ -67,10 +67,13 @@ public abstract class MixinDisconnectedScreen extends MixinScreen {
          */
         int x = this.width - 140;
         int y = this.height - 30;
-        disconnectButton = (this.client.isMultiplayerEnabled() ?
-                ButtonWidget.builder(this.buttonLabel, button -> this.client.setScreen(this.parent)) :
-                ButtonWidget.builder(TO_TITLE_TEXT, button -> this.client.setScreen(new TitleScreen()))
-        ).dimensions(x, y, 120, 20).build();
+
+        if (this.client != null) {
+            disconnectButton = (this.client.isMultiplayerEnabled() ?
+                    ButtonWidget.builder(this.buttonLabel, button -> this.client.setScreen(this.parent)) :
+                    ButtonWidget.builder(TO_TITLE_TEXT, button -> this.client.setScreen(new TitleScreen()))
+            ).dimensions(x, y, 120, 20).build();
+        }
         addDrawableChild(disconnectButton);
     }
 

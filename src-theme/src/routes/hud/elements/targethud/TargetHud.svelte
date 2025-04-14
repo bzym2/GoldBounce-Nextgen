@@ -78,8 +78,11 @@
     @use "../../../../colors.scss" as *;
 
     .targethud {
-        background-color: rgba($targethud-base-color, 0.68);
-        border-radius: 5px;
+        backdrop-filter: blur(22px) saturate(172%);
+        -webkit-backdrop-filter: blur(22px) saturate(172%);
+        background-color: rgba(17, 25, 40, 0.45);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
         overflow: hidden;
     }
 

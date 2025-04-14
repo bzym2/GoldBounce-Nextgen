@@ -10,7 +10,7 @@
 </script>
 
 <div class="taco">
-    <img src="img/hud/taco/taco.gif" alt="taco no load :(("
+    <img src="https://q0.itc.cn/q_70/images03/20241114/2be52013001e451d8e885fe8847ffde7.gif" alt="taco no load :(("
          class:transition={left < window.innerWidth + 100 && left > -100} style="left: {left}px">
 </div>
 

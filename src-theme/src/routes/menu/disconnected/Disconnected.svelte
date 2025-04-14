@@ -4,20 +4,22 @@
         directLoginToCrackedAccount,
         getAccounts,
         loginToAccount,
-        randomUsername,
         reconnectToServer
     } from "../../../integration/rest";
     import type {AccountManagerLoginEvent} from "../../../integration/events";
     import {listen} from "../../../integration/ws";
     import {onMount} from "svelte";
     import type {Account} from "../../../integration/types";
-    import {restoreSession,} from "../../../integration/rest.js";
+    import {
+        restoreSession,
+    } from "../../../integration/rest.js";
+    import Dot from "../../Dot.svelte";
 
     let premiumAccounts: Account[] = [];
 
     async function reconnectWithRandomUsername() {
         const username = await randomUsername();
-        await directLoginToCrackedAccount(username, false);
+        await directLoginToCrackedAccount(username);
     }
 
     async function reconnectWithRandomAccount() {
@@ -36,6 +38,7 @@
     });
 </script>
 
+<Dot/>
 <div class="reconnect">
     <ButtonSetting title="Reconnect" on:click={() => reconnectToServer()}/>
     <ButtonSetting title="Restore initial session" on:click={restoreSession}/>
