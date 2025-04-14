@@ -4,6 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import net.ccbluex.liquidbounce.api.core.HttpException
 import net.ccbluex.liquidbounce.api.core.withScope
 import net.ccbluex.liquidbounce.api.services.cdn.ClientCdn.requestStaffList
+import net.ccbluex.liquidbounce.config.types.ListValueType
+import net.ccbluex.liquidbounce.config.types.NamedChoice
 import net.ccbluex.liquidbounce.config.types.ToggleableConfigurable
 import net.ccbluex.liquidbounce.event.events.NotificationEvent
 import net.ccbluex.liquidbounce.event.events.PacketEvent
@@ -65,9 +67,22 @@ object ModuleAntiStaff : ClientModule("AntiStaff", Category.MISC) {
 
         private val serverStaffList = hashMapOf<String, Set<String>>()
 
+        private val serverMode by enumChoice("Server", Modes.HEYPIXEL)
+
+        private val typeServerAddr by text("ServerAddress(Only work on Address Based Mode)", "hypixel.net")
+
+        fun getFinalAddress(): String{
+            return if (serverMode == Modes.ADDRESS) {
+                typeServerAddr
+            } else {
+                serverMode.choiceName
+            }
+        }
+
+        private val address = getFinalAddress()
+
         override fun enable() {
-            val serverEntry = mc.currentServerEntry ?: return
-            val address = serverEntry.address.dropPort().rootDomain()
+
 
             if (serverStaffList.containsKey(address)) {
                 return
@@ -177,5 +192,9 @@ object ModuleAntiStaff : ClientModule("AntiStaff", Category.MISC) {
             metadata = MessageMetadata(id = "${this.name}#${username ?: "generic"}")
         )
     }
-
+    private enum class Modes(override val choiceName: String) : NamedChoice {
+        HEYPIXEL("Heypixel"),
+        QUICKMACRO("QuickMarco"),
+        ADDRESS("Address Based")
+    }
 }
