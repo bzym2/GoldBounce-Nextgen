@@ -122,7 +122,7 @@ object ModuleCriticals : ClientModule("Criticals", Category.COMBAT) {
 
         private val critical by int("Critical", 1, 0..20)
         private val magic by int("Magic", 0, 0..20)
-
+        internal val debug by boolean("Debug", false)
         @Suppress("unused")
         private val attackHandler = handler<AttackEntityEvent> { event ->
             if (event.isCancelled) {

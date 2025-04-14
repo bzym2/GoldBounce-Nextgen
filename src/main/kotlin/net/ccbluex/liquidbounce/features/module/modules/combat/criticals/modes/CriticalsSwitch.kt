@@ -28,6 +28,7 @@ import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleC
 import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleCriticals.canDoCriticalHit
 import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleCriticals.modes
 import net.ccbluex.liquidbounce.features.module.modules.player.invcleaner.items.WeaponItemFacet
+import net.ccbluex.liquidbounce.utils.client.chat
 import net.ccbluex.liquidbounce.utils.item.attackDamage
 import net.ccbluex.liquidbounce.utils.item.getAttributeValue
 import net.minecraft.enchantment.Enchantments
@@ -63,7 +64,6 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
                 null
             }
         }.sortedByDescending { it.second }
-
         return when {
             weapons.size >= 2 -> weapons[1].first
             weapons.size == 1 -> weapons[0].first
@@ -85,21 +85,29 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
 
         val currentStack = player.getStackInHand(Hand.MAIN_HAND)
         if (currentStack.item !is SwordItem) return@handler
-
+        if(ModuleCriticals.VisualsConfigurable.debug){
+            chat("Stack:${currentStack.item.name}")
+        }
         val secondBestSlot = findSecondBestWeapon(currentStack) ?: return@handler
-
+        if(ModuleCriticals.VisualsConfigurable.debug){
+            chat("Switched to second-best weapon:${secondBestSlot}")
+        }
         // Store current slot
         val currentSlot = player.inventory.selectedSlot
 
-        // Switch to second best weapon
+        // Switch to second-best weapon
         player.inventory.selectedSlot = secondBestSlot
 
         // Attack with the switched weapon
         player.attack(event.entity)
-
+        if(ModuleCriticals.VisualsConfigurable.debug){
+            chat("Attacked with second-best weapon:${secondBestSlot}")
+        }
         // Switch back to original weapon
         player.inventory.selectedSlot = currentSlot
-
+        if (ModuleCriticals.VisualsConfigurable.debug){
+            chat("Switched back to original weapon:${currentSlot}")
+        }
         // Show critical particles
         showCriticals(event.entity)
     }
