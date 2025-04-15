@@ -94,6 +94,7 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
             chat("Switched to second-best weapon:${secondBestSlot}")
         }
         // Store current slot
+        val currentSlot = player.inventory.selectedSlot
         SilentHotbar.selectSlotSilently(this, secondBestSlot, 1)
         // Switch to second-best weapon
 
@@ -103,7 +104,7 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
             chat("Attacked with second-best weapon:${secondBestSlot}")
         }
         // Switch back to original weapon
-        player.inventory.selectedSlot = currentSlot
+        SilentHotbar.selectSlotSilently(this, currentSlot, 1)
         if (ModuleCriticals.VisualsConfigurable.debug){
             chat("Switched back to original weapon:${currentSlot}")
         }
