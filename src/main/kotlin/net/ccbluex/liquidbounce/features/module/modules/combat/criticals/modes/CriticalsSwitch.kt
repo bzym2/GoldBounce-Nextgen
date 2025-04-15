@@ -28,6 +28,7 @@ import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleC
 import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleCriticals.canDoCriticalHit
 import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleCriticals.modes
 import net.ccbluex.liquidbounce.features.module.modules.player.invcleaner.items.WeaponItemFacet
+import net.ccbluex.liquidbounce.utils.client.SilentHotbar
 import net.ccbluex.liquidbounce.utils.client.chat
 import net.ccbluex.liquidbounce.utils.item.attackDamage
 import net.ccbluex.liquidbounce.utils.item.getAttributeValue
@@ -93,10 +94,8 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
             chat("Switched to second-best weapon:${secondBestSlot}")
         }
         // Store current slot
-        val currentSlot = player.inventory.selectedSlot
-
+        SilentHotbar.selectSlotSilently(this, secondBestSlot, 1)
         // Switch to second-best weapon
-        player.inventory.selectedSlot = secondBestSlot
 
         // Attack with the switched weapon
         player.attack(event.entity)
