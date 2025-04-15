@@ -18,10 +18,12 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.combat.criticals.modes
 
+import net.ccbluex.liquidbounce.bzym.GlobalVars
 import net.ccbluex.liquidbounce.config.types.Choice
 import net.ccbluex.liquidbounce.config.types.ChoiceConfigurable
 import net.ccbluex.liquidbounce.event.events.AttackEntityEvent
 import net.ccbluex.liquidbounce.event.handler
+import net.ccbluex.liquidbounce.features.module.ModuleManager
 import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleAutoClicker
 import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleCriticals
 import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleCriticals.VisualsConfigurable.showCriticals
@@ -39,6 +41,7 @@ import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.ItemStack
 import net.minecraft.item.SwordItem
 import net.minecraft.util.Hand
+import kotlin.io.path.Path
 
 /**
  * Criticals by switching to second-best weapon mode
@@ -47,7 +50,6 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
 
     override val parent: ChoiceConfigurable<Choice>
         get() = modes
-
     private fun getWeaponDamage(stack: ItemStack): Float? {
         if (stack.item !is SwordItem) return 0f
         return stack.getAttributeValue(EntityAttributes.ATTACK_DAMAGE)?.toFloat()
@@ -77,7 +79,15 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
         if (event.isCancelled || event.entity !is LivingEntity) {
             return@handler
         }
-
+        if (GlobalVars().criticalsSwitchDoCancel) {
+            if(ModuleCriticals.VisualsConfigurable.debug){
+                chat("Cancelled critical hit")
+            }
+            event.cancelEvent()
+        }
+        if(ModuleCriticals.VisualsConfigurable.debug){
+            chat("Attempting critical hit")
+        }
         val ignoreSprinting = ModuleCriticals.WhenSprinting.shouldAttemptCritWhileSprinting()
 
         if (!canDoCriticalHit(true, ignoreSprinting)) {
@@ -95,16 +105,22 @@ object CriticalsSwitch : Choice("SwitchWeapon") {
         }
         // Store current slot
         val currentSlot = player.inventory.selectedSlot
-        SilentHotbar.selectSlotSilently(this, secondBestSlot, 1)
+        player.inventory.selectedSlot = secondBestSlot
         // Switch to second-best weapon
 
         // Attack with the switched weapon
-        player.attack(event.entity)
+        GlobalVars().criticalsSwitchDoCancel = false
         if(ModuleCriticals.VisualsConfigurable.debug){
+            chat("Set docancel to false")
+        }
+        player.attack(event.entity)
+        GlobalVars().criticalsSwitchDoCancel = true
+        if(ModuleCriticals.VisualsConfigurable.debug){
+            chat("Set docancel to true")
             chat("Attacked with second-best weapon:${secondBestSlot}")
         }
         // Switch back to original weapon
-        SilentHotbar.selectSlotSilently(this, currentSlot, 1)
+        player.inventory.selectedSlot = currentSlot
         if (ModuleCriticals.VisualsConfigurable.debug){
             chat("Switched back to original weapon:${currentSlot}")
         }

@@ -50,7 +50,6 @@ object ModuleCriticals : ClientModule("Criticals", Category.COMBAT) {
     init {
         enableLock()
     }
-
     val modes = choices("Mode", 1) {
         arrayOf(
             NoneChoice(it),
@@ -78,7 +77,6 @@ object ModuleCriticals : ClientModule("Criticals", Category.COMBAT) {
 
         val stopSprinting by enumChoice("StopSprinting", StopSprintingMode.LEGIT)
         private val enemyInRange by float("Range", 4.0f, 0.0f..10.0f)
-
         @Suppress("unused")
         private val attackHandler = handler<AttackEntityEvent>(
             priority = CRITICAL_MODIFICATION
