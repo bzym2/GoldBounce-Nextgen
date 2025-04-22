@@ -33,6 +33,12 @@ internal object VelocityGrimFull : VelocityMode("GrimFull") {
                 lastAttackTime = System.currentTimeMillis()
             }
         }
+        handler<GameTickEvent> {
+            if(debugMessage) chat("GameTickEvent triggered!")
+        }
+        handler<WorldChangeEvent> {
+            if(debugMessage) chat("WorldChangeEvent triggered!")
+        }
     }
 
     /**
@@ -40,12 +46,13 @@ internal object VelocityGrimFull : VelocityMode("GrimFull") {
      */
     private val packetHandler = handler<PacketEvent> { event ->
         val packet = event.packet
-
         if (packet is EntityVelocityUpdateS2CPacket && packet.entityId == mc.player?.id) {
             val player = mc.player ?: return@handler
             if (onlyGround && !player.isOnGround) return@handler
 
             if (player.hurtTime in minHurtTime..maxHurtTime) {
+                if(debugMessage) chat("Velocity packet detected: X=${packet.velocityX}, Y=${packet.velocityY}, Z=${packet.velocityZ}")
+
                 if (debugMessage) {
                     chat("Reducing velocity: X=${packet.velocityX}, Y=${packet.velocityY}, Z=${packet.velocityZ}")
                 }
