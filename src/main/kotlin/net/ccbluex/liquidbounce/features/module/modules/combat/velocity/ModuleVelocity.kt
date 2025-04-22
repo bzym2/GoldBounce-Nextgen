@@ -62,7 +62,8 @@ object ModuleVelocity : ClientModule("Velocity", Category.COMBAT, aliases = arra
             // Anti cheat modes
             VelocityAAC442,
             VelocityExemptGrim117,
-            VelocityIntave
+            VelocityIntave,
+            VelocityGrimFull
         )
     ).apply(::tagBy)
 
